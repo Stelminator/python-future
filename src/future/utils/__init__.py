@@ -450,7 +450,8 @@ else:
             e.__suppress_context__ = True
         else:
             raise TypeError("exception causes must derive from BaseException")
-        e.__context__ = sys.exc_info()[1]
+        if not hasattr(e, '__context__'):
+            e.__context__ = sys.exc_info()[1]
         raise e
 
     exec('''
